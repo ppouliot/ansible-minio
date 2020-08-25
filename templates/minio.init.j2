@@ -30,7 +30,10 @@ USER="{{ minio_user }}"
 [ -n "${MINIO_VOLUMES}" ] || log_daemon_msg "Variable MINIO_VOLUMES not set in {{ minio_server_envfile }}"
 
 # Set the DAEMON_ARGS variable
-DAEMON_ARGS="server $MINIO_OPTS $MINIO_VOLUMES"
+# For running as Server
+# DAEMON_ARGS="server $MINIO_OPTS $MINIO_VOLUMES"
+
+DAEMON_ARGS="gateway nas $MINIO_OPTS $MINIO_VOLUMES"
 
 # Specifies the maximum file descriptor number that can be opened by this process
 ulimit -n 65536
