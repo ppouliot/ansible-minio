@@ -22,7 +22,10 @@ PermissionsStartOnly=true
 EnvironmentFile={{ minio_server_envfile }}
 ExecStartPre=/bin/bash -c "[ -n \"${MINIO_VOLUMES}\" ] || echo \"Variable MINIO_VOLUMES not set in {{ minio_server_envfile }}\""
 
-ExecStart={{ minio_server_bin }} server $MINIO_OPTS $MINIO_VOLUMES
+# Used for Server Only
+# ExecStart={{ minio_server_bin }} server $MINIO_OPTS $MINIO_VOLUMES
+ExecStart={{ minio_server_bin }} gateway nas $MINIO_OPTS $MINIO_VOLUMES
+
 
 # Let systemd always restart this service, in limits defined by StartLimitIntervalSec and StartLimitBurst.
 Restart=always
